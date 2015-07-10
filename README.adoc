@@ -1,0 +1,20 @@
+# docker-nxt
+Docker container to run Nxt on testnet or mainnet
+
+See https://registry.hub.docker.com/u/chevdor/nxt/
+
+## Intro
+This image is based on phusion/baseimage. It installs java and the latest NXT software.
+
+By default, the container will run on testnet using the following command:
+
+   docker run -it -p 6876:6876 chevdor/nxt:0.0.2
+   
+However, you may request the container to run on the mainnet by specifying the ENV variable as shown below:
+
+   docker run -it -p 7876:7876 -e "NXTNET=main" chevdor/nxt:0.0.2
+
+
+NOTE: Any other value than “main” for the NXTNET variable will make your container run on mainnet.
+
+WARNING: When you start the container, it will immediately connect and start downloading the blockchain. The testnet blockchain is much smaller than the mainnet blockchain (which is why the container default to testnet unless you specifically say you want to run on the mainnet). In any case, downloading the blockchain may take up to several hours. Be patient!
