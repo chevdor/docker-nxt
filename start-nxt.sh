@@ -6,4 +6,5 @@ else
 	ln -s /nxt/conf/nxt-test.properties /nxt/conf/nxt.properties
 fi  
 
+cd /nxt
 ./run.sh

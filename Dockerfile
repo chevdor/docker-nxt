@@ -1,17 +1,26 @@
 FROM phusion/baseimage:0.9.16
 MAINTAINER Chevdor <chevdor@gmail.com>
-LABEL version="0.0.1"
+LABEL version="0.0.2"
 
-RUN apt-get update && apt-get -y install \
-	wget \
+RUN \
+  echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
+  add-apt-repository -y ppa:webupd8team/java && \
+  apt-get update && \
+  apt-get install -y oracle-java8-installer \
+  	wget \
 	unzip \
-	joe
+	joe \
+	&& \
+  rm -rf /var/lib/apt/lists/* && \
+  rm -rf /var/cache/oracle-jdk8-installer
 
-# this is to be changed...
-RUN wget https://dl.dropboxusercontent.com/u/8099076/NXT/jre.zip
-RUN unzip jre.zip
-RUN chmod +x jre/bin/*
-RUN ln -s /jre/bin/java /bin/java
+# cleanup
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Define commonly used JAVA_HOME variable
+ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
+
+RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
 
 RUN mkdir /home/nxt && cd /home/nxt
 RUN wget https://bitbucket.org/JeanLucPicard/nxt/downloads/nxt-client-1.5.12.zip
@@ -26,4 +35,4 @@ COPY ./nxt-main.properties /nxt/conf/
 COPY ./nxt-test.properties /nxt/conf/
 COPY ./start-nxt.sh /nxt/
 
-CMD cd /nxt && ./start-nxt.sh
+CMD ["/nxt/start-nxt.sh", "/bin/bash"] 
