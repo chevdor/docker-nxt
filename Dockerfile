@@ -1,6 +1,6 @@
 FROM phusion/baseimage:0.9.16
 MAINTAINER Chevdor <chevdor@gmail.com>
-LABEL version="0.0.2"
+LABEL version="0.1.0"
 
 RUN \
   echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
