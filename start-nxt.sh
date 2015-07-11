@@ -1,4 +1,5 @@
 #!/bin/bash
+cd /nxt
 
 if [ "$NXTNET" = "main" ]; then
 	DB="nxt_db"
@@ -13,9 +14,8 @@ echo Database is $DB
 # This ENV variable must be removed for the container
 # to start 'normally'.
 # $BLOCKCHAINDL must point to a zip that contains the nxt_db folder itself.
-if [ -n "${BLOCKCHAINDL-}" ]; then
-	cd /nxt
-	wget "$BLOCKCHAINDL" && rm -Rf $DB && unzip *.zip && rm *.zip
+if [ -n "${BLOCKCHAINDL-}" ] && [ ! -d "$DB" ]; then
+	wget "$BLOCKCHAINDL" && unzip *.zip && rm *.zip
 fi
 
 if [ "$NXTNET" = "main" ]; then
@@ -24,7 +24,6 @@ else
 	ln -s /nxt/conf/nxt-test.properties /nxt/conf/nxt.properties
 fi  
 
-cd /nxt
 ./run.sh
 
 
