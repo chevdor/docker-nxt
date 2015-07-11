@@ -9,9 +9,9 @@ RUN \
   apt-get update && \
   apt-get install -y oracle-java8-installer \
   wget \
-	unzip \
-	joe \
-	&& \
+  unzip \
+  joe \
+  && \
   rm -rf /var/lib/apt/lists/* && \
   rm -rf /var/cache/oracle-jdk8-installer && \
   apt-get clean && \
@@ -23,10 +23,10 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 # RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
 
 RUN cd / && \
-    wget https://bitbucket.org/JeanLucPicard/nxt/downloads/nxt-client-1.5.12.zip && \ 
-    unzip nxt-client*.zip && \
-    rm *.zip && \
-    cd /nxt
+  wget https://bitbucket.org/JeanLucPicard/nxt/downloads/nxt-client-1.5.12.zip && \ 
+  unzip nxt-client*.zip && \
+  rm *.zip && \
+  cd /nxt
 
 VOLUME /nxt
 
