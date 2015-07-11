@@ -7,7 +7,7 @@ RUN \
   add-apt-repository -y ppa:webupd8team/java && \
   apt-get update && \
   apt-get install -y oracle-java8-installer \
-  	wget \
+  wget \
 	unzip \
 	joe \
 	&& \
@@ -21,10 +21,11 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 
 # RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
 
-RUN mkdir /home/nxt && \
-    cd /home/nxt && \
+RUN cd / && \
     wget https://bitbucket.org/JeanLucPicard/nxt/downloads/nxt-client-1.5.12.zip && \ 
-    unzip nxt-client*
+    unzip nxt-client*.zip && \
+    rm *.zip && \
+    cd /nxt
 
 VOLUME /nxt
 
