@@ -26,10 +26,10 @@ fi
 
 if [ "$NXTNET" = "main" ]; then
 	echo "Linking config to mainnet"
-	ln -s /nxt/conf/nxt-main.properties /nxt/conf/nxt.properties
+	ln -sf /nxt/conf/nxt-main.properties /nxt/conf/nxt.properties
 else
 	echo "Linking config to testnet"
-	ln -s /nxt/conf/nxt-test.properties /nxt/conf/nxt.properties
+	ln -sf /nxt/conf/nxt-test.properties /nxt/conf/nxt.properties
 fi  
 
 ./run.sh
