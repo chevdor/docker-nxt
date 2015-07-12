@@ -1,9 +1,17 @@
 # docker-nxt: Docker image
 
-You can find this image on the docker hub at https://registry.hub.docker.com/u/chevdor/nxt/
+You can find this image on the docker hub at:
+https://registry.hub.docker.com/u/chevdor/nxt/
 
 ## Intro
 Docker allows creating lightweight virtualized environment. You can read more about Docker at http://www.docker.com
+
+
+[![NXT Docker Container](http://img.youtube.com/vi/7Lj5h8XJ4RU/0.jpg)](http://www.youtube.com/watch?v=7Lj5h8XJ4RU)
+
+[image::http://img.youtube.com/vi/7Lj5h8XJ4RU/0.jpg["NXT in a Docker Container",align="left"],'http://www.youtube.com/watch?v=7Lj5h8XJ4RU']
+
+image::http://img.youtube.com/vi/7Lj5h8XJ4RU/0.jpg
 
 ## A word about this image
 This is a Docker container to run Nxt on testnet or mainnet. This image is based on phusion/baseimage. 
