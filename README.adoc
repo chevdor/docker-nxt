@@ -1,16 +1,15 @@
-# docker-nxt
-Docker container to run Nxt on testnet or mainnet
+# docker-nxt: Docker image
 
-See https://registry.hub.docker.com/u/chevdor/nxt/
+You can find this image on the docker hub at https://registry.hub.docker.com/u/chevdor/nxt/
 
 ## Intro
 Docker allows creating lightweight virtualized environment. You can read more about Docker at http://www.docker.com
 
 ## A word about this image
-This image is based on phusion/baseimage. 
-It installs java and the latest NXT software.
+This is a Docker container to run Nxt on testnet or mainnet. This image is based on phusion/baseimage. 
+It installs java and the latest NXT software. By default, the container will run on testnet.
 
-By default, the container will run on testnet.
+NOTE: In order to save a few MB, the image is removing a few things from the official NRS: .exe, source & changelog folders, ...
 
 ## Creating and running the contaimer
 
@@ -24,7 +23,7 @@ Here is what the options are:
 
 * +-p ABCD:6876+ means you map the port ABCD (the on you will access) to the port 6876 of the container (6876 being the port for testnet).
 * +--name whatever+ allows you to name your container. That makes things easier.
-* the last parameter is the name of the image 
+* +chevdor/docker-nxt:latest+ is the name of the image 
 
 For more options or explanations about the options, please refer to the Docker documentation.
 
@@ -32,7 +31,7 @@ If you are curious about the image and would like to have a look at what it does
 
    docker run -it -p 6876:6876 --name mytestnet chevdor/docker-nxt:latest bash
 
-Notice the +bash+ at the end. Instead of starting off the start script, you will be dumped in a shell and can look around.
+Notice the +bash+ at the end. Instead of starting off the start script, you will be dumped in a shell and can look around. When you do that, the blockchain is *not* downloaded and the NRS client does *not* start automagically.
    
 ### Mainnet
 
@@ -55,11 +54,11 @@ As we speak, the current size for the NXT blockchain (zipped) is:
 Downloading the blockchain the first time may take quite some time... lots of time.
 We can improve that!
 
-You will need to create a zip file of the blockchain and make it available on your network. Your zip file can be named as you like. When unzipped, you must get a single folder called nxt_db or nxt_test_db.
+You will need to create a zip file of the blockchain and make it available on your network. Your zip file can be named as you like. When unzipped, you must get a single folder called +nxt_db+ or +nxt_test_db+.
 
-You make your zip available on a web server and note the address. You get something like http://192.168.0.1/blockchain/mainnet-2015-07-12.zip
+You make your zip available on a web server and note the address. You should have something similar to http://192.168.0.1/blockchain/mainnet-2015-07-12.zip You could of course put that on a Dropbox or similar service but the best is to keep it local within your network to ensure that the download will be as fast as it can.
 
-WARNING: Downloading an unknown blockchain from 'somewhere' is risky and not recommended at all. Don´t do it!
+WARNING: Downloading an unknown blockchain from an unknown/untrusted source is risky and not recommended at all. Don´t do that except if you... just don´t do that!
 
 You can tell the container to start off your zip file in case it has no blockchain (which is the case by default).
 
