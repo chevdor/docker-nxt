@@ -4,23 +4,66 @@ Docker container to run Nxt on testnet or mainnet
 See https://registry.hub.docker.com/u/chevdor/nxt/
 
 ## Intro
-This image is based on phusion/baseimage. It installs java and the latest NXT software.
+Docker allows creating lightweight virtualized environment. You can read more about Docker at http://www.docker.com
 
-By default, the container will run on testnet using the following command:
+## A word about this image
+This image is based on phusion/baseimage. 
+It installs java and the latest NXT software.
 
-   docker run -it -p 6876:6876 chevdor/docker-nxt:latest
+By default, the container will run on testnet.
+
+## Creating and running the contaimer
+
+### Testnet
+
+To run the container, use the following command where:
+
+   docker run -it -p 6876:6876 --name mytestnet chevdor/docker-nxt:latest
+
+Here is what the options are:
+
+* +-p ABCD:6876+ means you map the port ABCD (the on you will access) to the port 6876 of the container (6876 being the port for testnet).
+* +--name whatever+ allows you to name your container. That makes things easier.
+* the last parameter is the name of the image 
+
+For more options or explanations about the options, please refer to the Docker documentation.
+
+If you are curious about the image and would like to have a look at what it does first, you can issue the following command:
+
+   docker run -it -p 6876:6876 --name mytestnet chevdor/docker-nxt:latest bash
+
+Notice the +bash+ at the end. Instead of starting off the start script, you will be dumped in a shell and can look around.
    
-However, you may request the container to run on the mainnet by specifying the ENV variable as shown below:
+### Mainnet
 
-   docker run -it -p 7876:7876 -e "NXTNET=main" chevdor/docker-nxt:latest
+You may request the container to run on the mainnet by specifying the ENV variable +NXTNET=main+ as shown below:
 
+   docker run -it -p 7876:7876 -e "NXTNET=main" --name mymainnet chevdor/docker-nxt:latest
 
-NOTE: Any other value than “main” for the NXTNET variable will make your container run on mainnet.
+NOTE: Any other value than “main” for the NXTNET variable will make your container run on testnet.
 
-WARNING: When you start the container, it will immediately connect and start downloading the blockchain. The testnet blockchain is much smaller than the mainnet blockchain (which is why the container default to testnet unless you specifically say you want to run on the mainnet). In any case, downloading the blockchain may take up to several hours. Be patient!
+## Blockchain
+
+When you start the container, it will immediately connect and start downloading the blockchain if required. The testnet blockchain is much smaller than the mainnet blockchain (which is why the container default to testnet unless you specifically say you want to run on the mainnet). In any case, downloading the blockchain may take up to several hours. Be patient!
+
+As we speak, the current size for the NXT blockchain (zipped) is:
+
+- Mainnet: 460 MB
+- Testnet: 126 MB
 
 ## Bootstraping the blockchain
 Downloading the blockchain the first time may take quite some time... lots of time.
-We can improve that.
+We can improve that!
 
-   docker run -it -p 6876:6876 -e "BLOCKCHAINDL=http://192.168.0.4/blockchains-bootstrap/nxt_test_db.zip" <imageid>  
+You will need to create a zip file of the blockchain and make it available on your network. Your zip file can be named as you like. When unzipped, you must get a single folder called nxt_db or nxt_test_db.
+
+You make your zip available on a web server and note the address. You get something like http://192.168.0.1/blockchain/mainnet-2015-07-12.zip
+
+WARNING: Downloading an unknown blockchain from 'somewhere' is risky and not recommended at all. Don´t do it!
+
+You can tell the container to start off your zip file in case it has no blockchain (which is the case by default).
+
+   docker run -it -p 6876:6876 -e "BLOCKCHAINDL=http://192.168.0.1/blockchain/nxt_test_db.zip" chevdor/docker-nxt:latest  
+
+NOTE: The container will attempt to download the blockchain from your zip file only if the database folder is unavailable.
+You can leave the ENV variable as it is even if you restart the container. The container will see that you already have a databse folder and skip the download. If you want redownload the blockchain from your zip, you will have to either delete the database folder manually in the container or simple kick off a brand new container.
