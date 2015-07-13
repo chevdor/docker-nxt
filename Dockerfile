@@ -1,7 +1,10 @@
 FROM phusion/baseimage:0.9.16
 MAINTAINER Chevdor <chevdor@gmail.com>
-LABEL version="0.1.2"
-LABEL NRSVersion="1.5.12.1"
+LABEL version="0.1.3"
+LABEL NRSVersion="1.5.13.0"
+
+ADD https://bitbucket.org/JeanLucPicard/nxt/downloads/nxt-client-1.5.13.zip / 
+ADD sha256.txt /
 
 RUN \
   echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
@@ -13,7 +16,7 @@ RUN \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
   cd / && \
-  wget https://bitbucket.org/JeanLucPicard/nxt/downloads/nxt-client-1.5.12.zip && \ 
+  shasum -a 256 -c sha256.txt && \
   unzip nxt-client*.zip && \
   rm *.zip && \
   cd /nxt && \
@@ -33,4 +36,4 @@ COPY ./nxt-main.properties /nxt/conf/
 COPY ./nxt-test.properties /nxt/conf/
 COPY ./start-nxt.sh /nxt/
 
-CMD ["/nxt/start-nxt.sh", "/bin/bash"] 
+CMD ["/nxt/start-nxt.sh", "/bin/bash"]

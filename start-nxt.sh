@@ -9,10 +9,6 @@ fi
 
 echo Database is $DB
 
-echo "---------- DEBUG ------------"
-ls -al
-echo "---------- DEBUG ------------"
-
 # if we need to bootstrap, we do that first.
 # Warning, bootstrapping will delete the current blockchain.
 # This ENV variable must be removed for the container
