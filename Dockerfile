@@ -36,4 +36,6 @@ COPY ./nxt-main.properties /nxt/conf/
 COPY ./nxt-test.properties /nxt/conf/
 COPY ./start-nxt.sh /nxt/
 
+EXPOSE 6876 7876 6874 7874
+
 CMD ["/nxt/start-nxt.sh", "/bin/bash"]
