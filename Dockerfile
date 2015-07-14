@@ -1,6 +1,6 @@
 FROM phusion/baseimage:0.9.16
 MAINTAINER Chevdor <chevdor@gmail.com>
-LABEL version="0.1.3"
+LABEL version="0.1.4"
 LABEL NRSVersion="1.5.13.0"
 
 ADD https://bitbucket.org/JeanLucPicard/nxt/downloads/nxt-client-1.5.13.zip / 
