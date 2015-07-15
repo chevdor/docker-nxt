@@ -16,6 +16,30 @@ NOTE: In order to save a few MB, the image is removing a few things from the off
 
 ## Creating and running the contaimer
 
+### Environment variables
+
+.NXTNET
+
+Optionnal: test or main
+Default value: test
+
+.BLOCKCHAINDL
+
+Optional: url to a zip
+
+.PLUGINS 
+
+url to text file. See below
+
+	<sha256> TAB http://192.168.0.1/plugin1.zip
+	<sha256> TAB http://192.168.0.1/plugin2.zip
+	<sha256> TAB http://192.168.0.1/plugin3.zip
+	EMPTY LINE
+	
+.SCRIPT: 
+
+Optional: url to a script to run before NRS starts
+
 ### Testnet
 
 To run the container, use the following command where:

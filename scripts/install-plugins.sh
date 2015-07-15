@@ -4,29 +4,36 @@ url=$1
 workdir=plugindl
 tmp=plugins.txt
 echo "Getting plugins from $url"
-wget $url -O "$workdir/$tmp"
 mkdir "$workdir"
+wget -q $url -O "$workdir/$tmp"
 
-cat $tmp | while read line
+pluginsFolder=/nxt/html/ui/plugins/
+
+cat "$workdir/$tmp" | while read line
 do
    #echo $line
-   IFS=' ' read -a myarray <<< "$line"
+   IFS=$'\t' read -a myarray <<< "$line"
    pluginURL=${myarray[1]}
    pluginChecksum=${myarray[0]}
    filename=$(basename "$pluginURL")
-   echo -e "  checksum:    $pluginChecksum"
-   echo -e "  url:      $pluginURL"
-   echo -e "  file:     $filename"
-   echo -e   
-
-   wget "$pluginURL" -O "$workdir/$filename"
-   if [ `shasum -a 256 "$workdir/$filename"` = $pluginChecksum ]; then
-      echo -e "OK"
+   
+   echo -e "  url       : $pluginURL"
+   echo -e "  file      : $filename"
+   echo -e "  expected  : $pluginChecksum"
+   
+   wget -q "$pluginURL" -O "$workdir/$filename"
+   IFS=' ' read -a array2 <<< `shasum -a 256 "$workdir/$filename"` 
+   checksum=${array2[0]}
+   echo -e "  checksum  : $checksum"
+   
+   if [ "$checksum" == "$pluginChecksum" ]; then
+      echo -e "Checksum for $filename matched - Installing plugin"
+      ./scripts/install-nxt-plugin.sh "$pluginsFolder" "$workdir/$filename"
    else
-   echo -e "NO OK"
-  
+      echo -e "Checksum for $filename FAILED - Skipping install"
    fi;
-done
-echo $line
 
-# rm -Rf "$workdir"
+   echo -e   
+done
+
+rm -Rf "$workdir"
