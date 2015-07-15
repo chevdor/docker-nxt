@@ -18,6 +18,14 @@ NOTE: In order to save a few MB, the image is removing a few things from the off
 
 ### Environment variables
 
+.NRSVersion
+
+Optionnal: Version in the format A.B.C(.D)
+
+Default: Follows the current version. Currently +1.5.13+
+
+You can use this ENV variable to get an older version for which there is no image or get a new version that is so bleeding new that there is no docker image ready yet.
+
 .NXTNET
 
 Optionnal: test or main
@@ -25,20 +33,27 @@ Default value: test
 
 .BLOCKCHAINDL
 
-Optional: url to a zip
+Optional: URL to a zip containing the blockchain to limit the amount of blocks your container will have to download.
+Default: none
+
+NOTE: If you leave this ENV variable empty, not blockchain will be pre-downloaded so it will take a while until your container fully catches up
 
 .PLUGINS 
 
-url to text file. See below
+URL to a text file. See format below
 
 	<sha256> TAB http://192.168.0.1/plugin1.zip
 	<sha256> TAB http://192.168.0.1/plugin2.zip
 	<sha256> TAB http://192.168.0.1/plugin3.zip
 	EMPTY LINE
+
+WARNING: Don´t omit the last empty line, if you do so, the last plugin will be skipped.
 	
 .SCRIPT: 
 
-Optional: url to a script to run before NRS starts
+Optional: URL to a script to run before NRS starts
+
+Default: none
 
 ### Testnet
 
@@ -68,11 +83,11 @@ You may request the container to run on the mainnet by specifying the ENV variab
 
 NOTE: Any other value than “main” for the NXTNET variable will make your container run on testnet.
 
-## Blockchain
+## Blockchain bootstrapping
 
 When you start the container, it will immediately connect and start downloading the blockchain if required. The testnet blockchain is much smaller than the mainnet blockchain (which is why the container default to testnet unless you specifically say you want to run on the mainnet). In any case, downloading the blockchain may take up to several hours. Be patient!
 
-As we speak, the current size for the NXT blockchain (zipped) is:
+As we speak, the current size for the NXT blockchain (zipped) is approximately:
 
 - Mainnet: 460 MB
 - Testnet: 126 MB

@@ -8,7 +8,14 @@ mkdir "$workdir"
 wget -q $url -O "$workdir/$tmp"
 
 pluginsFolder=/nxt/html/ui/plugins/
-
+# if we passed a url describing the plugins to install
+# we loop thru the file, 
+# download the plugins
+# check the signatures
+# install the plugins that have valid signatures
+# the URL should point to a txt file with the following content
+# <shasum256>  http://..../plugin.zip
+    
 cat "$workdir/$tmp" | while read line
 do
    #echo $line

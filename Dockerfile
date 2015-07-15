@@ -3,7 +3,6 @@ MAINTAINER Chevdor <chevdor@gmail.com>
 LABEL version="0.1.4"
 
 ENV NRSVersion=1.5.13
-ADD scripts /nxt/scripts
 
 RUN \
   echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
@@ -15,7 +14,9 @@ RUN \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
   cd /
-  
+
+ADD scripts /nxt/scripts
+
 # Define commonly used JAVA_HOME variable
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 
@@ -28,8 +29,8 @@ ENV NXTNET test
 
 COPY ./nxt-main.properties /nxt/conf/
 COPY ./nxt-test.properties /nxt/conf/
-COPY ./start-nxt.sh /nxt/
+COPY ./init-nxt.sh /nxt/
 
 EXPOSE 6876 7876 6874 7874
 
-CMD ["/nxt/start-nxt.sh", "/bin/bash"]
+CMD ["/nxt/init-nxt.sh", "/bin/bash"]
