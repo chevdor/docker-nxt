@@ -10,6 +10,17 @@ if [ -n "${SCRIPT-}" ]; then
 	./scripts/$filename
 fi  
 
+cd /
+# Now time to get the NRS client
+wget https://bitbucket.org/JeanLucPicard/nxt/downloads/nxt-client-$NRSVersion.zip && \
+wget https://bitbucket.org/JeanLucPicard/nxt/downloads/nxt-client-$NRSVersion.changelog.txt.asc && \
+gpg --keyserver pgpkeys.mit.edu --recv-key 0xFF2A19FA && \
+gpg --verify nxt-client-$NRSVersion.changelog.txt.asc && \
+unzip nxt-client*.zip && \
+rm *.zip *.asc && \
+cd /nxt && \
+rm -Rf *.exe src changelogs
+
 # if we passed a url describing the plugins to install
 # we loop thru the file
 # download the plugins

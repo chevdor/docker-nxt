@@ -1,10 +1,8 @@
 FROM phusion/baseimage:0.9.16
 MAINTAINER Chevdor <chevdor@gmail.com>
 LABEL version="0.1.4"
-LABEL NRSVersion="1.5.13.0"
 
-ADD https://bitbucket.org/JeanLucPicard/nxt/downloads/nxt-client-1.5.13.zip / 
-ADD sha256.txt /
+ENV NRSVersion=1.5.13
 ADD scripts /nxt/scripts
 
 RUN \
@@ -16,13 +14,8 @@ RUN \
   rm -rf /var/cache/oracle-jdk8-installer && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
-  cd / && \
-  shasum -a 256 -c sha256.txt && \
-  unzip nxt-client*.zip  && \
-  rm *.zip /sha256.txt && \
-  cd /nxt && \
-  rm -Rf *.exe src changelogs
-
+  cd /
+  
 # Define commonly used JAVA_HOME variable
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 
