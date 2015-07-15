@@ -1,7 +1,7 @@
 # docker-nxt: Docker image
 
 You can find this image on the docker hub at:
-https://registry.hub.docker.com/u/chevdor/nxt/
+https://registry.hub.docker.com/u/chevdor/docker-nxt/
 
 ## Intro
 Docker allows creating lightweight virtualized environment. You can read more about Docker at http://www.docker.com
