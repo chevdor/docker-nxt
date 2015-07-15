@@ -1,3 +1,0 @@
-56271daa4f35b01cd3d62c1780f2ca32d5674c371a8b1554793a16507b710dc2	http://192.168.0.4/nxt-plugins/dividends_scanner.zip
-59b82a30cac1b955a574b0d7bf766c20dd6e78dcd92030ceaca46ce36e7a35f3	http://192.168.0.4/nxt-plugins/dividend.zip
-8e9c6b1dad0cf84cf6e8a2420b980c530765ea61c916315d9059f75210ad7a51	http://192.168.0.4/nxt-plugins/dividend_payout.zip
