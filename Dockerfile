@@ -5,6 +5,7 @@ LABEL NRSVersion="1.5.13.0"
 
 ADD https://bitbucket.org/JeanLucPicard/nxt/downloads/nxt-client-1.5.13.zip / 
 ADD sha256.txt /
+ADD scripts /nxt/scripts
 
 RUN \
   echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
@@ -17,8 +18,8 @@ RUN \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
   cd / && \
   shasum -a 256 -c sha256.txt && \
-  unzip nxt-client*.zip && \
-  rm *.zip && \
+  unzip nxt-client*.zip  && \
+  rm *.zip /sha256.txt && \
   cd /nxt && \
   rm -Rf *.exe src changelogs
 
@@ -35,5 +36,7 @@ ENV NXTNET test
 COPY ./nxt-main.properties /nxt/conf/
 COPY ./nxt-test.properties /nxt/conf/
 COPY ./start-nxt.sh /nxt/
+
+EXPOSE 6876 7876 6874 7874
 
 CMD ["/nxt/start-nxt.sh", "/bin/bash"]

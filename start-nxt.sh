@@ -1,12 +1,34 @@
 #!/bin/bash
 cd /nxt
 
+# if a script was provided, we download it locally
+# then we run it before anything else starts
+if [ -n "${SCRIPT-}" ]; then
+	filename=$(basename "$SCRIPT")
+	wget "$SCRIPT" -O "./scripts/$filename"
+	chmod u+x "./scripts/$filename"
+	./scripts/$filename
+fi  
+
+# if we passed a url describing the plugins to install
+# we loop thru the file
+# download the plugins
+# check the signatures
+# install the plugins that have valid signatures
+# the URL should point to a txt file with the following content
+# <shasum256>	http://..../plugin.zip
+if [ -n "${PLUGINS-}" ]; then
+	./scripts/install-plugins.sh "$PLUGINS"
+fi  
+
+# We figure out what is the current db folder
 if [ "$NXTNET" = "main" ]; then
 	DB="nxt_db"
 else
 	DB="nxt_test_db"
 fi  
 
+# just to be sure :)
 echo Database is $DB
 
 # if we need to bootstrap, we do that first.
@@ -29,5 +51,3 @@ else
 fi  
 
 ./run.sh
-
-
