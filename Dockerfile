@@ -13,6 +13,7 @@ RUN \
   rm -rf /var/cache/oracle-jdk8-installer && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+  mkdir /nxt \
   cd /
 
 ADD scripts /nxt/scripts
@@ -23,6 +24,7 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 # RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
 
 VOLUME /nxt
+WORKDIR /nxt
 
 ENV NXTNET test 			
 # when running the container, you can override that using -e "NXTNET=main"
