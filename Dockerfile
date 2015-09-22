@@ -13,7 +13,7 @@ RUN \
   rm -rf /var/cache/oracle-jdk8-installer && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
-  mkdir /nxt \
+  mkdir /nxt && \
   cd /
 
 ADD scripts /nxt/scripts
