@@ -1,10 +1,11 @@
-#!/bin/bash
+#!/bin/sh
 
 if [ ! -f "/nxt/.init" ]; then 
 	echo -e " init-nxt.sh: Performing init..."
 
 	cd /nxt
-
+	mkdir /nxt/conf
+	
 	# if a script was provided, we download it locally
 	# then we run it before anything else starts
 	if [ -n "${SCRIPT-}" ]; then
@@ -16,9 +17,9 @@ if [ ! -f "/nxt/.init" ]; then
 
 	cd /
 	# Now time to get the NRS client
-	wget https://bitbucket.org/JeanLucPicard/nxt/downloads/nxt-client-$NRSVersion.zip && \
-	wget https://bitbucket.org/JeanLucPicard/nxt/downloads/nxt-client-$NRSVersion.changelog.txt.asc && \
-	gpg --keyserver pgpkeys.mit.edu --recv-key 0xFF2A19FA && \
+	wget --no-check-certificate https://bitbucket.org/JeanLucPicard/nxt/downloads/nxt-client-$NRSVersion.zip && \
+	wget --no-check-certificate  https://bitbucket.org/JeanLucPicard/nxt/downloads/nxt-client-$NRSVersion.changelog.txt.asc && \
+	gpg --keyserver pgpkeys.mit.edu --recv-key 0x811d6940e1e4240c && \
 	gpg --verify nxt-client-$NRSVersion.changelog.txt.asc && \
 	unzip -o nxt-client*.zip && \
 	rm *.zip *.asc && \
@@ -51,10 +52,10 @@ if [ ! -f "/nxt/.init" ]; then
 	# linking of the config
 	if [ "$NXTNET" = "main" ]; then
 		echo " init-nxt.sh: Linking config to mainnet"
-		ln -sf /nxt/conf/nxt-main.properties /nxt/conf/nxt.properties
+		cp /nxt-boot/conf/nxt-main.properties /nxt/conf/nxt.properties
 	else
 		echo " init-nxt.sh: Linking config to testnet"
-		ln -sf /nxt/conf/nxt-test.properties /nxt/conf/nxt.properties
+		cp /nxt-boot/conf/nxt-test.properties /nxt/conf/nxt.properties
 	fi  
 
 	# If we did all of that, we dump a file that will signal next time that we
