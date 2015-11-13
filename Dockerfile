@@ -1,8 +1,8 @@
 FROM jeanblanchard/java:jre-8
 MAINTAINER Chevdor <chevdor@gmail.com>
-LABEL version="0.1.5"
+LABEL version="1.6.2"
 
-ENV NRSVersion=1.5.15
+ENV NRSVersion=1.6.2
 
 RUN \
   apk update && \
