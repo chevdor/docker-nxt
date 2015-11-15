@@ -16,6 +16,7 @@ if [ ! -f "/nxt/.init" ]; then
 	fi  
 
 	cd /
+	
 	# Now time to get the NRS client
 	wget --no-check-certificate https://bitbucket.org/JeanLucPicard/nxt/downloads/nxt-client-$NRSVersion.zip && \
 	wget --no-check-certificate  https://bitbucket.org/JeanLucPicard/nxt/downloads/nxt-client-$NRSVersion.changelog.txt.asc && \

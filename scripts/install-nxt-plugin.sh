@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # usage
 # ./install-nxt-plugin.sh <target> plugin1.zip plugin2.zip ...
 

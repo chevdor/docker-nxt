@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 url=$1
 workdir=plugindl
