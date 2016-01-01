@@ -24,7 +24,7 @@ NOTE: In order to save a few MB, the image is removing a few things from the off
 
 Optionnal: Version in the format A.B.C(.D)
 
-Default: Follows the current version. Currently +1.5.13+
+Default: Follows the current version. Currently +1.7.4+
 
 You can use this ENV variable to get an older version for which there is no image or get a new version that is so bleeding new that there is no docker image ready yet.
 
@@ -110,3 +110,7 @@ You can tell the container to start off your zip file in case it has no blockcha
 
 NOTE: The container will attempt to download the blockchain from your zip file only if the database folder is unavailable.
 You can leave the ENV variable as it is even if you restart the container. The container will see that you already have a databse folder and skip the download. If you want redownload the blockchain from your zip, you will have to either delete the database folder manually in the container or simple kick off a brand new container.
+
+## Update
+
+To update from a version to the next, you can use a volume. First start the first container, then start the second with the updated version, pointing to your volume.
