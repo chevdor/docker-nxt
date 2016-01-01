@@ -91,7 +91,7 @@ When you start the container, it will immediately connect and start downloading 
 
 As we speak, the current size for the NXT blockchain (zipped) is approximately:
 
-- Mainnet: 460 MB
+- Mainnet: 555 MB
 - Testnet: 126 MB
 
 ## Bootstraping the blockchain
@@ -113,4 +113,12 @@ You can leave the ENV variable as it is even if you restart the container. The c
 
 ## Update
 
-To update from a version to the next, you can use a volume. First start the first container, then start the second with the updated version, pointing to your volume.
+The update from a version to the next is easy if you use a volume. 
+
+* First stop the first container (old version)
+* In your volume, delete the +.init+ file (no need to back it up, it is an empty file)
+* Start the second with the new version, pointing to your volume
+
+NOTE: Once you upgraded to a new version, you will not be able to revert to an older version. So make it easy for you to revert, I suggest you create a ZIP of your current database. See chapters above.
+
+NOTE: When upgrading to a new version, the upgrade may take quite a while (like several long minutes until all the tables are migrated). Be patient! The NRS client will only be available once the update is finished.

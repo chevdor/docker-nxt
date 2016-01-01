@@ -3,9 +3,14 @@
 if [ ! -f "/nxt/.init" ]; then 
 	echo -e " init-nxt.sh: Performing init..."
 
-	cd /nxt
+	# If there is no .init, this can be a new install
+	# or an upgrade... in the second case, we want to do some cleanup to ensure
+	# that the upgrade will go smooth
+	
+	rm -Rf /nxt/lib && \
 	mkdir /nxt/conf
 	
+	cd /nxt
 	# if a script was provided, we download it locally
 	# then we run it before anything else starts
 	if [ -n "${SCRIPT-}" ]; then
