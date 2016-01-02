@@ -121,4 +121,4 @@ The update from a version to the next is easy if you use a volume.
 
 NOTE: Once you upgraded to a new version, you will not be able to revert to an older version. So make it easy for you to revert, I suggest you create a ZIP of your current database. See chapters above.
 
-NOTE: When upgrading to a new version, the upgrade may take quite a while (like several long minutes until all the tables are migrated). Be patient! The NRS client will only be available once the update is finished.
+NOTE: When upgrading to a new version, the upgrade may take quite a while (my last took 16 hours), be patient! The NRS client will only be available once the update is finished. If you cannot wait, you can watch the logs :)
