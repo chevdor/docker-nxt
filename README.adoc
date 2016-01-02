@@ -92,7 +92,7 @@ When you start the container, it will immediately connect and start downloading 
 As we speak, the current size for the NXT blockchain (zipped) is approximately:
 
 - Mainnet: 555 MB
-- Testnet: 126 MB
+- Testnet: 178 MB
 
 ## Bootstraping the blockchain
 Downloading the blockchain the first time may take quite some time... lots of time.
