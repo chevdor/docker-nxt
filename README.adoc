@@ -115,7 +115,7 @@ You can leave the ENV variable as it is even if you restart the container. The c
 
 The update from a version to the next is easy if you use a volume. 
 
-* First stop the first container (old version)
+* First stop the first container (the old version)
 * In your volume, delete the +.init+ file (no need to back it up, it is an empty file)
 * Start the second with the new version, pointing to your volume
 
