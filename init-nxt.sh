@@ -10,14 +10,13 @@ if [ ! -f "/nxt/.init" ]; then
 	rm -Rf /nxt/lib && \
 	mkdir /nxt/conf
 	
-	cd /nxt
 	# if a script was provided, we download it locally
 	# then we run it before anything else starts
 	if [ -n "${SCRIPT-}" ]; then
 		filename=$(basename "$SCRIPT")
-		wget "$SCRIPT" -O "./scripts/$filename"
-		chmod u+x "./scripts/$filename"
-		./scripts/$filename
+		wget "$SCRIPT" -O "/nxt-boot/scripts/$filename"
+		chmod u+x "/nxt-boot/scripts/$filename"
+		/nxt-boot/scripts/$filename
 	fi  
 
 	cd /
@@ -33,7 +32,7 @@ if [ ! -f "/nxt/.init" ]; then
 	rm -Rf *.exe src changelogs
 
 	if [ -n "${PLUGINS-}" ]; then
-		./scripts/install-plugins.sh "$PLUGINS"
+		/nxt-boot/scripts/install-plugins.sh "$PLUGINS"
 	fi  
 
 	# We figure out what is the current db folder
