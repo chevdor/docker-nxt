@@ -57,6 +57,12 @@ Optional: URL to a script to run before NRS starts
 
 Default: none
 
+.ADMINPASSWD
+
+If provided, it will append the following line to the default config:
+   
+   nxt.adminPassword=<your pick>
+
 ### Testnet
 
 To run the container, use the following command where:
@@ -81,7 +87,7 @@ Notice the +bash+ at the end. Instead of starting off the start script, you will
 
 You may request the container to run on the mainnet by specifying the ENV variable +NXTNET=main+ as shown below:
 
-   docker run -it -p 7876:7876 -e "NXTNET=main" --name mymainnet chevdor/docker-nxt:latest
+   docker run -it -p 7876:7876 -e NXTNET=main --name mymainnet chevdor/docker-nxt:latest
 
 NOTE: Any other value than “main” for the NXTNET variable will make your container run on testnet.
 
@@ -106,7 +112,7 @@ WARNING: Downloading an unknown blockchain from an unknown/untrusted source is r
 
 You can tell the container to start off your zip file in case it has no blockchain (which is the case by default).
 
-   docker run -it -p 6876:6876 -e "BLOCKCHAINDL=http://192.168.0.1/blockchain/nxt_test_db.zip" chevdor/docker-nxt:latest  
+   docker run -it -p 6876:6876 -e BLOCKCHAINDL=http://192.168.0.1/blockchain/nxt_test_db.zip chevdor/docker-nxt:latest  
 
 NOTE: The container will attempt to download the blockchain from your zip file only if the database folder is unavailable.
 You can leave the ENV variable as it is even if you restart the container. The container will see that you already have a databse folder and skip the download. If you want redownload the blockchain from your zip, you will have to either delete the database folder manually in the container or simple kick off a brand new container.

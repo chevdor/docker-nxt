@@ -33,6 +33,8 @@ if [ ! -f "/nxt/.init" ]; then
 
 	if [ -n "${PLUGINS-}" ]; then
 		/nxt-boot/scripts/install-plugins.sh "$PLUGINS"
+	else
+		echo " PLUGINS not provided"
 	fi  
 
 	# We figure out what is the current db folder
@@ -43,7 +45,7 @@ if [ ! -f "/nxt/.init" ]; then
 	fi  
 
 	# just to be sure :)
-	echo Database is $DB
+	echo " Database is $DB"
 
 	# if we need to bootstrap, we do that first.
 	# Warning, bootstrapping will delete the current blockchain.
@@ -52,6 +54,8 @@ if [ ! -f "/nxt/.init" ]; then
 		echo " init-nxt.sh: $DB not found, downloading blockchain from $BLOCKCHAINDL";
 		wget "$BLOCKCHAINDL" && unzip *.zip && rm *.zip
 		echo " init-nxt.sh: Blockchain download complete"
+	else
+		echo " BLOCKCHAINDL not provided"
 	fi
 
 	# linking of the config
@@ -62,6 +66,13 @@ if [ ! -f "/nxt/.init" ]; then
 		echo " init-nxt.sh: Linking config to testnet"
 		cp /nxt-boot/conf/nxt-test.properties /nxt/conf/nxt.properties
 	fi  
+
+	# if the admin password is defined in the ENV variable, we append to the config
+	if [ -n "${ADMINPASSWD-}" ]; then
+		echo -e "\nnxt.adminPassword=${ADMINPASSWD-}" >> /nxt/conf/nxt.properties
+	else
+		echo " ADMINPASSWD not provided"
+	fi
 
 	# If we did all of that, we dump a file that will signal next time that we
 	# should not run the init-script again

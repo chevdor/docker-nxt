@@ -1,15 +1,12 @@
 #!/bin/sh
 
 # usage
-# ./install-nxt-plugin.sh <target> plugin1.zip plugin2.zip ...
+# ./install-nxt-plugin.sh plugin1.zip plugin2.zip ...
 
-target=$1
-echo "Installing NXT plugins into $target"
-array=( "$@" )
-arraylength=${#array[@]}
+target=/nxt/html/ui/plugins/
 
-for (( i=2; i<${arraylength}+1; i++ ));
+for plugin in "$@"
 do
-   p="${array[$i-1]}";
-   unzip -o "$p"  -x "__MACOSX*" -d "$target"
+	echo -e "Installing $plugin into $target"
+	unzip -o "$plugin"  -x "__MACOSX*" -d "$target"
 done
