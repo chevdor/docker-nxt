@@ -24,7 +24,7 @@ NOTE: In order to save a few MB, the image is removing a few things from the off
 
 Optionnal: Version in the format A.B.C(.D)
 
-Default: Follows the current version. Currently +1.7.4+
+Default: Follows the current version. Currently +1.7.5+
 
 You can use this ENV variable to get an older version for which there is no image or get a new version that is so bleeding new that there is no docker image ready yet.
 
