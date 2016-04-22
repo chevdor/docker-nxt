@@ -1,7 +1,5 @@
 # docker-nxt: Docker image
 
-image::https://badge.imagelayers.io/chevdor/docker-nxt:latest.svg[https://imagelayers.io/?images=chevdor/docker-nxt:latest]
-
 You can find this image on the docker hub at:
 https://registry.hub.docker.com/u/chevdor/docker-nxt/
 
