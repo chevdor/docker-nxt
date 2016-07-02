@@ -79,7 +79,7 @@ if [ ! -f "/nxt/.init" ]; then
 	touch /nxt/.init
 else
 	echo -e " init-nxt.sh: Init already done, skipping init."
-fi;
+fi
 
 cd /nxt
 ./run.sh
