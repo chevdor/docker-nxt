@@ -14,7 +14,7 @@ It installs java and the latest NXT software. By default, the container will run
 
 NOTE: In order to save a few MB, the image is removing a few things from the official NRS: .exe, source & changelog folders, ...
 
-## Creating and running the contaimer
+## Creating and running the container
 
 ### Environment variables
 
