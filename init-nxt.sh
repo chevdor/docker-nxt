@@ -22,9 +22,9 @@ if [ ! -f "/nxt/.init" ]; then
 	cd /
 	
 	# Now time to get the NRS client
-	wget --no-check-certificate https://bitbucket.org/JeanLucPicard/nxt/downloads/nxt-client-$NRSVersion.zip && \
-	wget --no-check-certificate  https://bitbucket.org/JeanLucPicard/nxt/downloads/nxt-client-$NRSVersion.changelog.txt.asc && \
-	gpg --keyserver pgpkeys.mit.edu --recv-key 0x811d6940e1e4240c && \
+	wget --no-check-certificate https://bitbucket.org/Jelurida/nxt/downloads/nxt-client-$NRSVersion.zip && \
+	wget --no-check-certificate  https://bitbucket.org/Jelurida/nxt/downloads/nxt-client-$NRSVersion.changelog.txt.asc && \
+	gpg --keyserver pgpkeys.mit.edu --recv-key 0xFF18FD55 && \
 	gpg --verify nxt-client-$NRSVersion.changelog.txt.asc && \
 	unzip -o nxt-client*.zip && \
 	rm *.zip *.asc && \
